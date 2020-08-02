@@ -25,7 +25,10 @@
   
 #### 前端网站提供
 [zeongit-account-web](https://github.com/JunJieFu/zeongit-account-web)
-  
+
+#### 项目依赖
+[zeongit-share](https://github.com/JunJieFu/zeongit-share)
+
 #### 构建  
 ``` bash  
 $ mvn spring-boot:run
