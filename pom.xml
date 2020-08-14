@@ -13,6 +13,7 @@
 
     <modules>
         <module>web</module>
+        <module>qiniu</module>
     </modules>
 
     <parent>
@@ -34,6 +35,11 @@
             <dependency>
                 <groupId>com.zeongit</groupId>
                 <artifactId>web</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zeongit</groupId>
+                <artifactId>qiniu</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
