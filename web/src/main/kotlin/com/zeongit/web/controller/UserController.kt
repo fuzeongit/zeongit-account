@@ -1,13 +1,8 @@
 package com.zeongit.web.controller
 
-
-
-import com.zeongit.web.component.AccountConfig
-import com.zeongit.web.dto.SendCodeDto
-import com.zeongit.web.dto.UpdateDto
-import com.zeongit.web.dto.UserDto
-import com.zeongit.web.service.UserService
 import com.zeongit.share.annotations.Auth
+import com.zeongit.share.annotations.CurrentUserId
+import com.zeongit.share.annotations.CurrentUserInfoId
 import com.zeongit.share.annotations.RestfulPack
 import com.zeongit.share.constant.BaseConstant
 import com.zeongit.share.enum.VerificationCodeOperation
@@ -15,6 +10,12 @@ import com.zeongit.share.exception.PermissionException
 import com.zeongit.share.exception.ProgramException
 import com.zeongit.share.model.Result
 import com.zeongit.share.util.JwtUtil
+import com.zeongit.web.component.AccountConfig
+import com.zeongit.web.dto.SendCodeDto
+import com.zeongit.web.dto.UpdateDto
+import com.zeongit.web.dto.UserDto
+import com.zeongit.web.service.UserInfoService
+import com.zeongit.web.service.UserService
 import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -28,7 +29,8 @@ import javax.servlet.http.HttpServletResponse
 @RequestMapping("user")
 class UserController(private val accountConfig: AccountConfig,
                      private val redisTemplate: StringRedisTemplate,
-                     private val userService: UserService) {
+                     private val userService: UserService
+) {
 
     /**
      * 发送验证码
@@ -112,6 +114,18 @@ class UserController(private val accountConfig: AccountConfig,
     @PostMapping("/checkLogin")
     @RestfulPack
     fun checkLogin(): Boolean {
+        return true
+    }
+
+    /**
+     * 修改用户密码
+     */
+    @Auth
+    @PostMapping("modified")
+    @RestfulPack
+    fun modified(@CurrentUserId id: Int, @RequestBody dto: UserDto): Boolean {
+        val user = userService.get(id)
+        userService.forgot(user.phone, dto.password!!)
         return true
     }
 

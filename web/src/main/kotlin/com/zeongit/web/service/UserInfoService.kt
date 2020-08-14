@@ -1,4 +1,4 @@
-package com.zeongit.share.service
+package com.zeongit.web.service
 
 import com.zeongit.share.database.account.entity.UserInfo
 import org.springframework.data.domain.Page

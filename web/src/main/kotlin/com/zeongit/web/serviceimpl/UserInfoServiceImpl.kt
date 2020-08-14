@@ -3,7 +3,7 @@ package com.zeongit.web.serviceimpl
 import com.zeongit.share.exception.NotFoundException
 import com.zeongit.share.database.account.dao.UserInfoDao
 import com.zeongit.share.database.account.entity.UserInfo
-import com.zeongit.share.service.UserInfoService
+import com.zeongit.web.service.UserInfoService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.domain.Specification

@@ -9,7 +9,7 @@ import com.zeongit.share.annotations.CurrentUserInfoId
 import com.zeongit.share.annotations.RestfulPack
 import com.zeongit.share.exception.NotFoundException
 import com.zeongit.share.database.account.entity.UserInfo
-import com.zeongit.share.service.UserInfoService
+import com.zeongit.web.service.UserInfoService
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
