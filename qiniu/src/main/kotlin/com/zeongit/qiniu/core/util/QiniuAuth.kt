@@ -166,43 +166,6 @@ class QiniuAuth(private val accessKey: String, private val secretKey: SecretKeyS
     }
 
     /**
-     * scope = bucket
-     * 一般情况下可通过此方法获取token
-     *
-     * @param bucket 空间名
-     * @return 生成的上传token
-     */
-    fun uploadToken(bucket: String): String {
-        return uploadToken(bucket, null, 3600, null, true)
-    }
-
-    /**
-     * scope = bucket:key
-     * 同名文件覆盖操作、只能上传指定key的文件可以可通过此方法获取token
-     *
-     * @param bucket 空间名
-     * @param key    key，可为 null
-     * @return 生成的上传token
-     */
-    fun uploadToken(bucket: String, key: String): String {
-        return uploadToken(bucket, key, 3600, null, true)
-    }
-
-    /**
-     * 生成上传token
-     *
-     * @param bucket  空间名
-     * @param key     key，可为 null
-     * @param expires 有效时长，单位秒
-     * @param policy  上传策略的其它参数，如 new StringMap().put("endUser", "uid").putNotEmpty("returnBody", "")。
-     * scope通过 bucket、key间接设置，deadline 通过 expires 间接设置
-     * @return 生成的上传token
-     */
-    fun uploadToken(bucket: String, key: String, expires: Long, policy: StringMap): String {
-        return uploadToken(bucket, key, expires, policy, true)
-    }
-
-    /**
      * 生成上传token
      *
      * @param bucket  空间名
@@ -213,7 +176,7 @@ class QiniuAuth(private val accessKey: String, private val secretKey: SecretKeyS
      * @param strict  是否去除非限定的策略字段，默认true
      * @return 生成的上传token
      */
-    private fun uploadToken(bucket: String, key: String?, expires: Long, policy: StringMap?, strict: Boolean): String {
+    fun uploadToken(bucket: String, key: String? = null, expires: Long = 3600, policy: StringMap? = null, strict: Boolean = true): String {
         val deadline = System.currentTimeMillis() / 1000 + expires
         return uploadTokenWithDeadline(bucket, key, deadline, policy, strict)
     }

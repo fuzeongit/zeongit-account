@@ -41,7 +41,7 @@ class UserServiceImpl(private val userDao: UserDao) : UserService {
     //登录
     override fun signIn(phone: String, password: String): User {
         !existsByPhone(phone) && throw PermissionException("手机号不存在")
-        return userDao.findOneByPhoneAndPassword(phone, password).orElseThrow { SignInException("账号密码不正确") }
+        return userDao.findOneByPhoneAndPassword(phone, password).orElseThrow { PermissionException("账号密码不正确") }
     }
 
     //修改密码

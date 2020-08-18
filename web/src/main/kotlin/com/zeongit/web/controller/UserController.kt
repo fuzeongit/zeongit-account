@@ -5,6 +5,7 @@ import com.zeongit.share.annotations.CurrentUserId
 import com.zeongit.share.annotations.CurrentUserInfoId
 import com.zeongit.share.annotations.RestfulPack
 import com.zeongit.share.constant.BaseConstant
+import com.zeongit.share.constant.ExceptionCodeConstant
 import com.zeongit.share.enum.VerificationCodeOperation
 import com.zeongit.share.exception.PermissionException
 import com.zeongit.share.exception.ProgramException
@@ -48,16 +49,16 @@ class UserController(private val accountConfig: AccountConfig,
                 userService.existsByPhone(phone) && throw ProgramException("手机号码已存在")
 //                smsComponent.sendVerificationCode(phone, verificationCode)
                 redisTemplate.opsForValue().set(String.format(accountConfig.registerVerificationCodePrefix, phone), verificationCode, accountConfig.verificationCodeTimeout, TimeUnit.MILLISECONDS)
-                Result(200, null, verificationCode)
+                Result(ExceptionCodeConstant.SUCCESS, null, verificationCode)
             }
             VerificationCodeOperation.FORGET -> {
                 !userService.existsByPhone(phone) && throw ProgramException("手机号码不存在")
 //                smsComponent.sendVerificationCode(phone, verificationCode)
                 redisTemplate.opsForValue().set(String.format(accountConfig.forgetVerificationCodePrefix, phone), verificationCode, accountConfig.verificationCodeTimeout, TimeUnit.MILLISECONDS)
-                Result(200, null, verificationCode)
+                Result(ExceptionCodeConstant.SUCCESS, null, verificationCode)
             }
             else -> {
-                Result(200, null, "888888")
+                Result(ExceptionCodeConstant.SUCCESS, null, "888888")
             }
         }
     }
