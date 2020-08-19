@@ -30,7 +30,7 @@ class BucketService(private val qiniuConfig: QiniuConfig) {
         val sourceNameEncodeBase64 = UrlSafeBase64.encodeToString("$sourceBucket:$url")!!
         val nameEncodeBase64 = UrlSafeBase64.encodeToString("$bucket:$url")!!
 
-        val qiniuUrl = qiniuConfig.qiniuUrl + "/" + sourceNameEncodeBase64 + "/" + nameEncodeBase64
+        val qiniuUrl = "http://" + qiniuConfig.qiniuHost + "/move/" + sourceNameEncodeBase64 + "/" + nameEncodeBase64
 
         val auth = QiniuAuth.create(qiniuConfig.qiniuAccessKey, qiniuConfig.qiniuSecretKey)
         val authorizationMap = auth.authorization(qiniuUrl, null, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -41,7 +41,7 @@ class BucketService(private val qiniuConfig: QiniuConfig) {
         val params = LinkedMultiValueMap<String, String>()
         //  请勿轻易改变此提交方式，大部分的情况下，提交方式都是表单提交
         headers.contentType = MediaType.APPLICATION_FORM_URLENCODED
-        headers.add("Host", "rs.qiniu.com")
+        headers.add("Host", qiniuConfig.qiniuHost)
         headers.add("Accept", "*/*")
         headers.add("Authorization", authorization)
         val requestEntity = HttpEntity<MultiValueMap<String, String>>(params, headers)
