@@ -14,6 +14,8 @@ class QiniuConfig {
     lateinit var qiniuAccessKey: String
 
     lateinit var qiniuSecretKey: String
+
+    lateinit var qiniuUrl: String
     //临时储存空间
     lateinit var qiniuTemporaryBucket: String
     //头像储存空间

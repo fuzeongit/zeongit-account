@@ -1,15 +1,18 @@
 package com.zeongit.web.controller
 
 
-import com.zeongit.web.dto.UserInfoDto
-import com.zeongit.web.service.UserService
+import com.zeongit.qiniu.core.component.QiniuConfig
+import com.zeongit.qiniu.service.BucketService
 import com.zeongit.share.annotations.Auth
 import com.zeongit.share.annotations.CurrentUserId
 import com.zeongit.share.annotations.CurrentUserInfoId
 import com.zeongit.share.annotations.RestfulPack
-import com.zeongit.share.exception.NotFoundException
 import com.zeongit.share.database.account.entity.UserInfo
+import com.zeongit.share.exception.NotFoundException
+import com.zeongit.share.exception.ProgramException
+import com.zeongit.web.dto.UserInfoDto
 import com.zeongit.web.service.UserInfoService
+import com.zeongit.web.service.UserService
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -18,7 +21,10 @@ import java.util.*
 @RequestMapping("userInfo")
 class UserInfoController(
         private val userService: UserService,
-        private val userInfoService: UserInfoService) {
+        private val userInfoService: UserInfoService,
+        private val qiniuConfig: QiniuConfig,
+        private val bucketService: BucketService) {
+
 
     /**
      * 创建及修改
@@ -41,8 +47,40 @@ class UserInfoController(
         info.country = userInfoDto.country ?: info.country
         info.province = userInfoDto.province ?: info.province
         info.city = userInfoDto.city ?: info.city
-        info.avatarUrl = userInfoDto.avatarUrl ?: info.avatarUrl
-        info.background = userInfoDto.background ?: info.background
+        return userInfoService.save(info)
+    }
+
+    /**
+     * 修改头像
+     */
+    @Auth(true)
+    @PostMapping("modifiedAvatarUrl")
+    @RestfulPack
+    fun modifiedAvatarUrl(@CurrentUserId userId: Int, @RequestBody userInfoDto: UserInfoDto): UserInfo {
+        val info = userInfoService.getByUserId(userId)
+        userInfoDto.avatarUrl.isNullOrEmpty() && throw ProgramException("操作有误")
+        bucketService.move(userInfoDto.avatarUrl!!, qiniuConfig.qiniuAvatarBucket, qiniuConfig.qiniuTemporaryBucket)
+        info.avatarUrl?.let {
+            bucketService.move(it, qiniuConfig.qiniuTemporaryBucket, qiniuConfig.qiniuAvatarBucket)
+        }
+        info.avatarUrl = userInfoDto.avatarUrl
+        return userInfoService.save(info)
+    }
+
+    /**
+     * 修改背景
+     */
+    @Auth(true)
+    @PostMapping("modifiedBackground")
+    @RestfulPack
+    fun modifiedBackground(@CurrentUserId userId: Int, @RequestBody userInfoDto: UserInfoDto): UserInfo {
+        val info = userInfoService.getByUserId(userId)
+        userInfoDto.background.isNullOrEmpty() && throw ProgramException("操作有误")
+        bucketService.move(userInfoDto.background!!, qiniuConfig.qiniuBackgroundBucket, qiniuConfig.qiniuTemporaryBucket)
+        info.background?.let {
+            bucketService.move(it, qiniuConfig.qiniuTemporaryBucket, qiniuConfig.qiniuBackgroundBucket)
+        }
+        info.background = userInfoDto.background
         return userInfoService.save(info)
     }
 
