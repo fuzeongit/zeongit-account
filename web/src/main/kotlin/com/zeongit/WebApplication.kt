@@ -15,16 +15,16 @@ import org.springframework.scheduling.annotation.EnableScheduling
 @EnableAsync
 @EnableScheduling
 @SpringBootApplication
-class AccountApplication : SpringBootServletInitializer() {
+class WebApplication : SpringBootServletInitializer() {
     override fun configure(builder: SpringApplicationBuilder): SpringApplicationBuilder {
         // 设置启动类，用于独立tomcat运行的入口
-        return builder.sources(AccountApplication::class.java)
+        return builder.sources(WebApplication::class.java)
     }
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            runApplication<AccountApplication>(*args)
+            runApplication<WebApplication>(*args)
         }
     }
 }
