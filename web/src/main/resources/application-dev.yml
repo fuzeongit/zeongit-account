@@ -38,6 +38,6 @@ qiniu:
   qiniuTemporaryBucket: temporary
   qiniuAvatarBucket: head
   qiniuBackgroundBucket: background
-  qiniuTemporaryBucketUrl: http://secdratemp.secdra.com
-  qiniuAvatarBucketUrl: http://secdrahead.secdra.com
-  qiniuBackgroundBucketUrl: http://secdraback.secdra.com
+  qiniuTemporaryBucketUrl: http://temporary.zeongit.cn
+  qiniuAvatarBucketUrl: http://avatar.zeongit.cn
+  qiniuBackgroundBucketUrl: http://background.zeongit.cn
