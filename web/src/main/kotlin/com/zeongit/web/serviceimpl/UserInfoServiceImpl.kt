@@ -1,8 +1,8 @@
 package com.zeongit.web.serviceimpl
 
+import com.zeongit.data.database.dao.UserInfoDao
+import com.zeongit.data.database.entity.UserInfo
 import com.zeongit.share.exception.NotFoundException
-import com.zeongit.share.database.account.dao.UserInfoDao
-import com.zeongit.share.database.account.entity.UserInfo
 import com.zeongit.web.service.UserInfoService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

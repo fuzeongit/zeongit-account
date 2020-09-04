@@ -1,6 +1,6 @@
 package com.zeongit.web.dto
 
-import com.zeongit.share.enum.VerificationCodeOperation
+import com.zeongit.data.constant.VerificationCodeOperation
 import com.zeongit.share.exception.ProgramException
 
 class SendCodeDto {

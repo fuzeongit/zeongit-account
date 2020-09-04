@@ -1,13 +1,13 @@
 package com.zeongit.web.controller
 
 
+import com.zeongit.data.database.entity.UserInfo
 import com.zeongit.qiniu.core.component.QiniuConfig
 import com.zeongit.qiniu.service.BucketService
 import com.zeongit.share.annotations.Auth
 import com.zeongit.share.annotations.CurrentUserId
 import com.zeongit.share.annotations.CurrentUserInfoId
 import com.zeongit.share.annotations.RestfulPack
-import com.zeongit.share.database.account.entity.UserInfo
 import com.zeongit.share.exception.NotFoundException
 import com.zeongit.share.exception.ProgramException
 import com.zeongit.web.dto.UserInfoDto

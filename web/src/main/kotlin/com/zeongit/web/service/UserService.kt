@@ -1,6 +1,6 @@
 package com.zeongit.web.service
 
-import com.zeongit.share.database.account.entity.User
+import com.zeongit.data.database.entity.User
 
 
 interface UserService {

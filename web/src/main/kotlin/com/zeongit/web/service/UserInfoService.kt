@@ -1,6 +1,6 @@
 package com.zeongit.web.service
 
-import com.zeongit.share.database.account.entity.UserInfo
+import com.zeongit.data.database.entity.UserInfo
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 

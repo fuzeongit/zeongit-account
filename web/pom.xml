@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>account</name>
+    <name>web</name>
     <description>account项目</description>
 
     <parent>
@@ -39,6 +39,10 @@
         <dependency>
             <groupId>com.zeongit</groupId>
             <artifactId>qiniu</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zeongit</groupId>
+            <artifactId>data</artifactId>
         </dependency>
     </dependencies>
 

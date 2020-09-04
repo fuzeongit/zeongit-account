@@ -1,11 +1,10 @@
 package com.zeongit.web.serviceimpl
 
-import com.zeongit.web.service.UserService
+import com.zeongit.data.database.dao.UserDao
+import com.zeongit.data.database.entity.User
 import com.zeongit.share.exception.NotFoundException
 import com.zeongit.share.exception.PermissionException
-import com.zeongit.share.exception.SignInException
-import com.zeongit.share.database.account.dao.UserDao
-import com.zeongit.share.database.account.entity.User
+import com.zeongit.web.service.UserService
 import org.springframework.stereotype.Service
 
 @Service

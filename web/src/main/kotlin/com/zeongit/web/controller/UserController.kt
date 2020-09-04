@@ -1,12 +1,11 @@
 package com.zeongit.web.controller
 
+import com.zeongit.data.constant.VerificationCodeOperation
 import com.zeongit.share.annotations.Auth
 import com.zeongit.share.annotations.CurrentUserId
-import com.zeongit.share.annotations.CurrentUserInfoId
 import com.zeongit.share.annotations.RestfulPack
 import com.zeongit.share.constant.BaseConstant
 import com.zeongit.share.constant.ExceptionCodeConstant
-import com.zeongit.share.enum.VerificationCodeOperation
 import com.zeongit.share.exception.PermissionException
 import com.zeongit.share.exception.ProgramException
 import com.zeongit.share.model.Result
@@ -15,7 +14,6 @@ import com.zeongit.web.component.AccountConfig
 import com.zeongit.web.dto.SendCodeDto
 import com.zeongit.web.dto.UpdateDto
 import com.zeongit.web.dto.UserDto
-import com.zeongit.web.service.UserInfoService
 import com.zeongit.web.service.UserService
 import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.web.bind.annotation.PostMapping
