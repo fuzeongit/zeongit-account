@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("qiniu")
 class QiniuController(private val qiniuConfig: QiniuConfig) {
-    @Auth()
+    @Auth
     @GetMapping("get")
     @RestfulPack
     fun get(): Result<String> {
