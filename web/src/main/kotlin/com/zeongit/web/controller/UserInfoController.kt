@@ -104,4 +104,16 @@ class UserInfoController(
         val info = userInfoService.get(id)
         return userService.get(info.userId).lastModifiedDate!!
     }
+
+    @GetMapping("getByTargetId")
+    @RestfulPack
+    fun getByTargetId(targetId: Int): UserInfo {
+        return userInfoService.get(targetId)
+    }
+
+    @GetMapping("getByUserId")
+    @RestfulPack
+    fun getByUserId(userId: Int): UserInfo {
+        return userInfoService.getByUserId(userId)
+    }
 }
